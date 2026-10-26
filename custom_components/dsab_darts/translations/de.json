@@ -1,0 +1,68 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Region",
+        "description": "Wähle die DSAB-Region (Spielgebiet).",
+        "data": { "region_id": "Region" }
+      },
+      "season": {
+        "title": "Saison",
+        "description": "Saison in {region}.",
+        "data": { "season_id": "Saison" }
+      },
+      "event": {
+        "title": "Liga",
+        "description": "Liga in {region}, {season}.",
+        "data": { "event_id": "Liga" }
+      },
+      "phase": {
+        "title": "Phase",
+        "description": "Diese Liga hat mehrere Phasen. Wähle eine aus.",
+        "data": { "phase_id": "Phase" }
+      },
+      "team": {
+        "title": "Dein Team",
+        "description": "Optional: Wähle ein Team aus {league}, um Team-Sensoren zu erhalten (Tabellenplatz, nächstes Spiel, letztes Ergebnis).",
+        "data": { "team_id": "Team" }
+      }
+    },
+    "error": {
+      "no_phase": "Diese Liga hat noch keine Phase mit Spielen."
+    },
+    "abort": {
+      "already_configured": "Diese Liga bzw. dieses Team ist bereits eingerichtet.",
+      "cannot_connect": "Das 3K-Darts-Backend ist nicht erreichbar.",
+      "no_regions": "Keine Regionen gefunden.",
+      "no_seasons": "Für diese Region wurden keine Saisons gefunden.",
+      "no_events": "Für diese Saison wurden keine Ligen gefunden."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Einstellungen",
+        "data": { "scan_interval": "Aktualisierungsintervall" },
+        "data_description": {
+          "scan_interval": "Während eines laufenden Spieltags wird unabhängig davon alle 5 Minuten aktualisiert."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "leader": { "name": "Tabellenführer" },
+      "next_round": { "name": "Nächster Spieltag" },
+      "last_round": { "name": "Letzter Spieltag" },
+      "top_player": { "name": "Bester Spieler" },
+      "placement": { "name": "Tabellenplatz" },
+      "points": { "name": "Punkte" },
+      "next_match": { "name": "Nächstes Spiel" },
+      "last_result": { "name": "Letztes Ergebnis" },
+      "team_players": { "name": "Spielerstatistik" }
+    },
+    "calendar": {
+      "matches": { "name": "Spiele" }
+    }
+  }
+}

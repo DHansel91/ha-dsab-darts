@@ -1,0 +1,68 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Region",
+        "description": "Choose the DSAB region (league area).",
+        "data": { "region_id": "Region" }
+      },
+      "season": {
+        "title": "Season",
+        "description": "Season in {region}.",
+        "data": { "season_id": "Season" }
+      },
+      "event": {
+        "title": "League",
+        "description": "League in {region}, {season}.",
+        "data": { "event_id": "League" }
+      },
+      "phase": {
+        "title": "Phase",
+        "description": "This league has several phases. Choose one.",
+        "data": { "phase_id": "Phase" }
+      },
+      "team": {
+        "title": "Your team",
+        "description": "Optional: choose a team in {league} for team sensors (placement, next match, last result).",
+        "data": { "team_id": "Team" }
+      }
+    },
+    "error": {
+      "no_phase": "This league has no phase with matches yet."
+    },
+    "abort": {
+      "already_configured": "This league/team is already configured.",
+      "cannot_connect": "Could not reach the 3K Darts backend.",
+      "no_regions": "No regions found.",
+      "no_seasons": "No seasons found for this region.",
+      "no_events": "No leagues found for this season."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Settings",
+        "data": { "scan_interval": "Update interval" },
+        "data_description": {
+          "scan_interval": "During a running match day the integration polls every 5 minutes regardless."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "leader": { "name": "League leader" },
+      "next_round": { "name": "Next match day" },
+      "last_round": { "name": "Last match day" },
+      "top_player": { "name": "Top player" },
+      "placement": { "name": "Placement" },
+      "points": { "name": "Points" },
+      "next_match": { "name": "Next match" },
+      "last_result": { "name": "Last result" },
+      "team_players": { "name": "Player statistics" }
+    },
+    "calendar": {
+      "matches": { "name": "Matches" }
+    }
+  }
+}

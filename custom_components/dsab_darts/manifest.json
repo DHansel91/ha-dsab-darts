@@ -1,0 +1,12 @@
+{
+  "domain": "dsab_darts",
+  "name": "DSAB Dartliga (3K Darts)",
+  "codeowners": ["@DHansel91"],
+  "config_flow": true,
+  "documentation": "https://github.com/DHansel91/ha-dsab-darts",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/DHansel91/ha-dsab-darts/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
