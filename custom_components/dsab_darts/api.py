@@ -3,13 +3,21 @@
 from __future__ import annotations
 
 import asyncio
+import json
+import logging
 from typing import Any
 
 import aiohttp
 
 from .const import API_BASE, DEFAULT_MANDANT_KEY
 
+_LOGGER = logging.getLogger(__name__)
+
 REQUEST_TIMEOUT = aiohttp.ClientTimeout(total=20)
+HEADERS = {
+    "Accept": "application/json",
+    "User-Agent": "HomeAssistant-DSAB-Darts (+https://github.com/DHansel91/ha-dsab-darts)",
+}
 
 
 class DartsApiError(Exception):
@@ -35,18 +43,26 @@ class DartsApiClient:
 
     async def _get(self, path: str, params: dict[str, Any] | None = None) -> Any:
         url = f"{self._base}/{path.lstrip('/')}"
+        _LOGGER.debug("GET %s %s", url, params)
         try:
             async with self._session.get(
-                url,
-                params=params,
-                timeout=REQUEST_TIMEOUT,
-                headers={"Accept": "application/json"},
+                url, params=params, timeout=REQUEST_TIMEOUT, headers=HEADERS
             ) as resp:
+                body = await resp.text()
                 if resp.status >= 400:
-                    raise DartsApiError(f"HTTP {resp.status} für {url}")
-                return await resp.json(content_type=None)
+                    raise DartsApiError(
+                        f"HTTP {resp.status} für {resp.url}: {body[:200]!r}"
+                    )
         except (aiohttp.ClientError, asyncio.TimeoutError) as err:
-            raise DartsApiConnectionError(f"{url}: {err}") from err
+            raise DartsApiConnectionError(
+                f"{url}: {type(err).__name__}: {err}"
+            ) from err
+        try:
+            return json.loads(body) if body.strip() else None
+        except ValueError as err:
+            raise DartsApiError(
+                f"Keine gültige JSON-Antwort von {url}: {body[:200]!r}"
+            ) from err
 
     # --- Auswahllisten für den Config-Flow ---------------------------------
 

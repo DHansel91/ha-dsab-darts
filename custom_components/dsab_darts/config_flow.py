@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 import voluptuous as vol
@@ -38,6 +39,8 @@ from .const import (
     MIN_SCAN_INTERVAL_MIN,
     NO_TEAM,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def _dropdown(options: list[SelectOptionDict]) -> SelectSelector:
@@ -80,7 +83,8 @@ class DartsConfigFlow(ConfigFlow, domain=DOMAIN):
 
         try:
             regions = await self.client.regions()
-        except DartsApiError:
+        except DartsApiError as err:
+            _LOGGER.warning("3K-Darts-Backend nicht erreichbar: %s", err)
             return self.async_abort(reason="cannot_connect")
 
         regions.sort(key=lambda r: r.get("name", "").casefold())
@@ -111,7 +115,8 @@ class DartsConfigFlow(ConfigFlow, domain=DOMAIN):
 
         try:
             seasons = await self.client.seasons(self._data[CONF_REGION_ID])
-        except DartsApiError:
+        except DartsApiError as err:
+            _LOGGER.warning("3K-Darts-Backend nicht erreichbar: %s", err)
             return self.async_abort(reason="cannot_connect")
 
         # API liefert die neueste Saison zuerst
@@ -157,7 +162,8 @@ class DartsConfigFlow(ConfigFlow, domain=DOMAIN):
             events = await self.client.events(
                 self._data[CONF_REGION_ID], self._data[CONF_SEASON_ID]
             )
-        except DartsApiError:
+        except DartsApiError as err:
+            _LOGGER.warning("3K-Darts-Backend nicht erreichbar: %s", err)
             return self.async_abort(reason="cannot_connect")
 
         # Reihenfolge der API beibehalten – sie ist nach Spielklasse sortiert
@@ -226,7 +232,8 @@ class DartsConfigFlow(ConfigFlow, domain=DOMAIN):
 
         try:
             participants = await self.client.participants(self._data[CONF_EVENT_ID])
-        except DartsApiError:
+        except DartsApiError as err:
+            _LOGGER.warning("3K-Darts-Backend nicht erreichbar: %s", err)
             return self.async_abort(reason="cannot_connect")
 
         teams = sorted(
