@@ -1,13 +1,7 @@
 {
   "domain": "dsab_darts",
   "name": "DSAB Dartliga (3K Darts)",
-  "categories": [
-    "productivity_information.calendars_todos",
-    "news_social_media"
-  ],
-  "codeowners": [
-    "@DHansel91"
-  ],
+  "codeowners": ["@DHansel91"],
   "config_flow": true,
   "documentation": "https://github.com/DHansel91/ha-dsab-darts",
   "integration_type": "service",
