@@ -21,6 +21,7 @@ Sensoren und als Kalender, damit du nie wieder einen Spieltag verpasst.
 - 🎯 Nächstes Spiel und letztes Ergebnis des eigenen Teams
 - 👤 Spielerrangliste der Liga und Spielerstatistik des eigenen Teams
 - ⚡ Automatisch schnellere Aktualisierung (alle 5 Minuten), solange ein Spiel läuft
+- 🃏 Eigene Dashboard-Card mit Tabelle, Spieltag und Team – ohne Zusatzinstallation
 - 🖱️ Einrichtung komplett über die Oberfläche, mehrere Ligen/Teams parallel möglich
 
 ## Installation
@@ -98,6 +99,30 @@ Der Kalender zeigt mit Team nur dessen Spiele, sonst alle Spiele der Liga.
 
 > Die großen Listen-Attribute (`tabelle`, `spiele`, `spieler`) werden nicht in
 > der Recorder-Datenbank gespeichert, um sie klein zu halten.
+
+## Card
+
+Die Integration bringt eine eigene Dashboard-Card mit. Sie wird automatisch
+geladen, eine Ressource musst du nicht anlegen. Nach dem ersten Installieren
+oder einem Update einmal den Browser-Cache leeren bzw. die App neu laden.
+
+**Dashboard bearbeiten → Karte hinzufügen → „DSAB Dartliga“** – oder per YAML:
+
+```yaml
+type: custom:dsab-darts-card
+entity: sensor.dc_mexikaner_bz_01_tabellenfuhrer  # optional, beliebige Entität der Liga
+default_view: team                                # optional: tabelle | spieltag | team
+views: [tabelle, spieltag, team]                  # optional, Auswahl und Reihenfolge der Tabs
+title: Meine Liga                                 # optional
+```
+
+Ohne `entity` nimmt die Card die erste eingerichtete Liga.
+
+| Ansicht | Inhalt |
+|---|---|
+| **Tabelle** | Ligatabelle mit Bilanz, Sets und Punkten; umschaltbar auf die Spielerrangliste (Top 10). Das eigene Team ist hervorgehoben. |
+| **Spieltag** | Letzter und nächster Spieltag mit allen Paarungen, Ergebnissen, Legs und Spiellokal (Link zu Google Maps). Direkt nach einem Spieltag stehen die Ergebnisse vorne, sonst der kommende. |
+| **Team** | Platz, Punkte, Bilanz, Set- und Leg-Differenz, nächstes Spiel mit Countdown, letztes Ergebnis und die Spielerstatistik des Teams nach Siegquote. Nur mit gewähltem Team. |
 
 ## Beispiele
 
