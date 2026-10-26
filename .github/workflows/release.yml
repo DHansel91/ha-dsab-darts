@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version im Manifest setzen
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          jq --arg v "$VERSION" '.version = $v' custom_components/dsab_darts/manifest.json > manifest.tmp
+          mv manifest.tmp custom_components/dsab_darts/manifest.json
+      - name: ZIP erstellen
+        run: cd custom_components/dsab_darts && zip -r ../../dsab_darts.zip . -x "__pycache__/*"
+      - name: ZIP an Release hängen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" dsab_darts.zip --clobber

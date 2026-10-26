@@ -1,6 +1,11 @@
 {
   "name": "DSAB Dartliga (3K Darts)",
   "content_in_root": false,
+  "zip_release": true,
+  "filename": "dsab_darts.zip",
   "render_readme": true,
+  "country": [
+    "DE"
+  ],
   "homeassistant": "2024.11.0"
 }
