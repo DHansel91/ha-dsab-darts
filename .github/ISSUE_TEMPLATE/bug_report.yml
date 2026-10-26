@@ -1,0 +1,34 @@
+name: Fehler melden
+description: Etwas funktioniert nicht wie erwartet
+labels: [bug]
+body:
+  - type: textarea
+    id: beschreibung
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du erwartet, was ist stattdessen passiert?
+    validations:
+      required: true
+  - type: input
+    id: liga
+    attributes:
+      label: Region / Saison / Liga
+      placeholder: z. B. Dartliga Nordoberpfalz, 2026/27, BZ 01
+  - type: input
+    id: version
+    attributes:
+      label: Version der Integration
+    validations:
+      required: true
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home-Assistant-Version
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log-Auszug
+      description: Mit aktiviertem Debug-Logging für `custom_components.dsab_darts`.
+      render: text

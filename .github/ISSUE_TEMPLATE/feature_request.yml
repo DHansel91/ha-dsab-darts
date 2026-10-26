@@ -1,0 +1,14 @@
+name: Funktionswunsch
+description: Idee für eine neue Funktion
+labels: [enhancement]
+body:
+  - type: textarea
+    id: wunsch
+    attributes:
+      label: Was wünschst du dir?
+    validations:
+      required: true
+  - type: textarea
+    id: nutzen
+    attributes:
+      label: Wofür würdest du es nutzen?
